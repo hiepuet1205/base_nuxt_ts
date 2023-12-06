@@ -4,7 +4,7 @@
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card elevation="24" class="rounded-xl" style="padding: 30px; border: 1px; border-radius: 50px;">
           <v-card-title class="text-center">
-            <h1 class="display-2 font-weight-bold">Login</h1>
+            <h1 class="display-2 font-weight-bold">Register</h1>
           </v-card-title>
           <v-form ref="form" lazy-validation>
             <v-text-field v-model="username" label="Username" required :rules="usernameRules"></v-text-field>
@@ -12,20 +12,18 @@
               :rules="passwordRules"></v-text-field>
           </v-form>
           <v-card-actions class="justify-center">
-            <v-btn @click="submit">Login</v-btn>
+            <v-btn @click="submit">Register</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
-   
+  
+     
 <script lang="ts" setup>
-import { login } from '~/api/auth';
+import { register } from '~/api/auth';
 import { useAuthStore } from '~/store/auth';
-
-import { getAllProvinces } from '~/api/master/province';
 
 const username = ref('')
 const password = ref('')
@@ -48,20 +46,20 @@ const passwordRules = [
 ]
 
 const authStore = useAuthStore()
-const { loginHandle } = authStore
+const { registerHandle } = authStore
 
 const submit = () => {
   form.value?.validate().then(async ({ valid: isValid }) => {
-    const data = await login({username: username.value, password: password.value});
-    if(data.id_token){
-      loginHandle(data.id_token)
+    const data = await register({ username: username.value, password: password.value });
+    if (data.id_token) {
+      registerHandle(data.id_token)
       await navigateTo('/')
     }
   })
 }
 
 </script>
-   
+     
 <style scoped>
 .align-center {
   height: 70vh;

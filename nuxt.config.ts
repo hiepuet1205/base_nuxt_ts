@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-    'vuetify/lib/styles/main.sass', 
-    // '@mdi/font/css/materialdesignicons.min.css'
+    'vuetify/lib/styles/main.sass',
+    '@mdi/font/css/materialdesignicons.min.css'
   ],
   build: {
     transpile: ['vuetify'],
   },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt3-leaflet'],
 })

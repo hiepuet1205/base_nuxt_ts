@@ -32,13 +32,17 @@ import { useAuthStore } from '../store/auth'
 import { storeToRefs } from 'pinia'
 
 const authStore = useAuthStore()
-const { logout } = authStore
+const { logoutHandle } = authStore
 const {user, isAuthenticated} = storeToRefs(authStore)
 
 const route = useRoute()
-console.log('current name', route.name)
 
 const isLogin = route.name == 'login'
 const isRegister = route.name == 'register'
+
+const logout = async () => {
+  logoutHandle()
+  await navigateTo('/login')
+}
 
 </script>

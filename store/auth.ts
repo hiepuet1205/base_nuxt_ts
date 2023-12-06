@@ -7,8 +7,7 @@ export const useAuthStore = defineStore({
     return {
       user: {name: 'abc'},
       token: '',
-      isAuthenticated: false,
-      redirectPath: '/',
+      isAuthenticated: false
     }
   },
   actions: {
@@ -21,20 +20,23 @@ export const useAuthStore = defineStore({
     setIsAuthenticated(isAuthenticated: boolean) {
       this.isAuthenticated = isAuthenticated
     },
-    setRedirectPath(redirectPath: string) {
-      this.redirectPath = redirectPath
+    registerHandle(token: string){
+      this.token = token
+      this.isAuthenticated = true
     },
-    logout() {
-      this.user = {name: 'abc'}
+    loginHandle(token: string){
+      this.token = token
+      this.isAuthenticated = true
+    },
+    logoutHandle() {
+      this.user = {name: ''}
       this.token = ''
       this.isAuthenticated = false
-      console.log(`User logged out`)
     }
   },
   getters: {
     getUser: state => state.user,
     getToken: state => state.token,
-    getIsAuthenticated: state => state.isAuthenticated,
-    getRedirectPath: state => state.redirectPath,
+    getIsAuthenticated: state => state.isAuthenticated
   },
 })
