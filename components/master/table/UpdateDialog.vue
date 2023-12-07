@@ -9,7 +9,7 @@
         <v-container>
           <v-row>
             <v-col v-for="(value, key) in editedItem" :key="key" cols="12" sm="6" md="4">
-              <v-text-field v-model="editedItem[key]" :label="capitalizeFirstLetter(key)"></v-text-field>
+              <v-text-field v-model="editedItem[key]" :label="capitalizeFirstLetter(key as string)"></v-text-field>
             </v-col>
           </v-row>
         </v-container>
@@ -36,6 +36,10 @@ const props = defineProps({
 
 const dialogUpdate = computed(() => props.dialog)
 const editedItem = ref({ ...props.item });
+
+watch(() => props.item, (newVal, oldVal) => {
+  editedItem.value = {...newVal}
+});
 
 const emits = defineEmits(['save-item', 'close'])
 

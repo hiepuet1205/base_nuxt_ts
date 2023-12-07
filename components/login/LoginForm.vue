@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height>
     <v-row align="center" justify="center">
-      <v-col cols="12" sm="6" offset-sm="3">
+      <v-col cols="12" md="6">
         <v-card elevation="24" class="rounded-xl" style="padding: 30px; border: 1px; border-radius: 50px;">
           <v-card-title class="text-center">
             <h1 class="display-2 font-weight-bold">Login</h1>
@@ -22,7 +22,7 @@
 
    
 <script lang="ts" setup>
-import { login } from '~/api/auth';
+import { login } from '~/api/auth/auth';
 import { useAuthStore } from '~/store/auth';
 
 import { getAllProvinces } from '~/api/master/province';

@@ -8,12 +8,12 @@
       @close="handleCloseUpdateDialog"></update-dialog>
   </div>
 </template>
-
+  
 <script lang="ts" setup>
 import { useAuthStore } from '~/store/auth'
 import { storeToRefs } from 'pinia'
-import { getAllProvinces, createProvince, updateProvince, deleteProvince } from '../../../api/master/province';
-import type { Province, SortItem, DataTableHeader } from '~/types/master'
+import {getAllDistricts, createDistrict, updateDistrict, deleteDistrict} from '~/api/master/district'
+import type { SortItem, DataTableHeader } from '~/types/master'
 import ListItem from '../table/ListItem.vue';
 import UpdateDialog from '../table/UpdateDialog.vue';
 import CreateDialog from '../table/CreateDialog.vue';
@@ -22,8 +22,8 @@ const authStore = useAuthStore()
 const { token } = storeToRefs(authStore)
 
 const { data: items } = await useAsyncData(
-  'provinces',
-  async () => await getAllProvinces(token.value)
+  'districts',
+  async () => await getAllDistricts(token.value)
 )
 
 const headers: Array<DataTableHeader> = [
@@ -32,21 +32,24 @@ const headers: Array<DataTableHeader> = [
     align: 'start',
     sortable: true,
     key: 'id',
-    width: 25
+    width: 20
   },
-  { title: 'Name', key: 'name', sortable: true, width: 25 },
-  { title: 'Order Number', key: 'orderNumber', sortable: true, width: 25 },
-  { title: 'Actions', key: 'action', sortable: false, width: 25 },
+  { title: 'Name', key: 'name', sortable: true, width: 20 },
+  { title: 'Province Id', key: 'provinceId', sortable: true, width: 20 },
+  { title: 'Order Number', key: 'orderNumber', sortable: true, width: 20 },
+  { title: 'Actions', key: 'action', sortable: false, width: 20 },
 ]
 const sortBy: Array<SortItem> = [{ key: 'name', order: 'asc' }]
-const title: string = "Province"
+const title: string = "District"
 const editedItem = ref({
   id: 0,
   name: '',
+  provinceId: 0,
   orderNumber: 0,
 })
 const defaultItem = ref({
   name: '',
+  provinceId: 0,
   orderNumber: 0,
 })
 const editedIndex = ref(-1)
@@ -54,16 +57,16 @@ const isDialogCreateOpen = ref(false)
 const isDialogUpdateOpen = ref(false)
 
 const getAllItems = async () => {
-  return await getAllProvinces(token.value);
+  return await getAllDistricts(token.value);
 }
 const createItem = async (item: any) => {
-  return await createProvince(token.value, item)
+  return await createDistrict(token.value, item)
 }
 const updateItem = async (id: number, item: any) => {
-  return await updateProvince(token.value, id, item);
+  return await updateDistrict(token.value, id, item);
 }
 const deleteItem = async (id: number) => {
-  return await deleteProvince(token.value, id);
+  return await deleteDistrict(token.value, id);
 }
 const handleCreateItem = async (item: any) => {
   const data = await createItem(item);
@@ -75,7 +78,6 @@ const handleUpdateItem = async (id: number, item: any) => {
   const data = await updateItem(id, item);
   editedItem.value = data;
   items.value.splice(editedIndex.value, 1, editedItem.value)
-  // items.value[editedIndex.value] = editedItem;
   isDialogUpdateOpen.value = false;
 }
 const handleDeleteItem = async (item: any) => {
@@ -98,6 +100,7 @@ const openUpdateDialog = (item: any) => {
   editedItem.value = {
     id: item.id,
     name: item.name || defaultItem.value.name,
+    provinceId: item.provinceId || defaultItem.value.provinceId,
     orderNumber: item.orderNumber || defaultItem.value.orderNumber,
   }
   isDialogUpdateOpen.value = true;
@@ -109,4 +112,5 @@ const handleCloseUpdateDialog = () => {
   isDialogUpdateOpen.value = false;
 }
 </script>
+    
   

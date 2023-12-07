@@ -14,49 +14,67 @@
       "id": 8,
       "name": "Item 8",
       "orderNumber": 8
+    },
+    {
+      "id": 9,
+      "name": "Item 9",
+      "orderNumber": 9
     }
   ],
   "districts": [
     {
       "id": 5,
       "name": "Item 5",
-      "provinceId": 4,
+      "provinceId": 0,
       "orderNumber": 5
     },
     {
       "id": 7,
       "name": "Item 7",
-      "provinceId": 4,
+      "provinceId": 0,
       "orderNumber": 7
     },
     {
       "id": 8,
       "name": "Item 8",
-      "provinceId": 4,
+      "provinceId": 0,
       "orderNumber": 8
+    },
+    {
+      "id": 9,
+      "name": "Item 9",
+      "provinceId": 0,
+      "orderNumber": 9
     }
   ],
   "wards": [
     {
       "id": 5,
       "name": "Item 5",
-      "provinceId": 4,
-      "districtId": 4,
+      "provinceId": 0,
+      "districtId": 0,
       "orderNumber": 5
     },
     {
       "id": 7,
       "name": "Item 7",
-      "provinceId": 4,
-      "districtId": 4,
+      "provinceId": 0,
+      "districtId": 0,
       "orderNumber": 7
     },
     {
       "id": 8,
       "name": "Item 8",
-      "provinceId": 4,
-      "districtId": 4,
+      "provinceId": 0,
+      "districtId": 0,
       "orderNumber": 8
+    },
+    {
+      "id": 9,
+      "name": "Item 9",
+      "provinceId": 0,
+      "districtId": 0,
+      "orderNumber": 9
     }
   ],
   "addresses": [
