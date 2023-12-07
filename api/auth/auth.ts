@@ -6,7 +6,7 @@ interface AUTH {
 }
 
 export const login: (auth: AUTH) => Promise<any> = async (auth: AUTH) => {
-  const res = await fetch(`${API_AUTH}auth/login`, {
+  const res = await fetch(`${API_AUTH}api/authenticate`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export const login: (auth: AUTH) => Promise<any> = async (auth: AUTH) => {
 }
 
 export const register: (auth: AUTH) => Promise<any> = async (auth: AUTH) => {
-  const res = await fetch(`${API_AUTH}auth/register`, {
+  const res = await fetch(`${API_AUTH}api/register`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

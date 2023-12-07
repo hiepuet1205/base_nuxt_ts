@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { User } from './types'
+import {} from "pinia-plugin-persistedstate";
 
 export const useAuthStore = defineStore({
   id: 'auth-store',
@@ -39,4 +40,5 @@ export const useAuthStore = defineStore({
     getToken: state => state.token,
     getIsAuthenticated: state => state.isAuthenticated
   },
+  persist: true
 })

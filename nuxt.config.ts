@@ -8,5 +8,5 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: ['@pinia/nuxt', 'nuxt3-leaflet'],
+  modules: ['@pinia/nuxt', 'nuxt3-leaflet', '@pinia-plugin-persistedstate/nuxt'],
 })

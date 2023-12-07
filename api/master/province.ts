@@ -1,7 +1,7 @@
 import { API_MASTER } from "~/constants/api";
 import type { Province } from "~/types/master";
 
-const apiUrl = `${API_MASTER}provinces/`;
+const apiUrl = `${API_MASTER}services/master/provinces`;
 
 export const getAllProvinces: (token: string) => Promise<any> = async (token: string) => {
   try {
@@ -13,6 +13,7 @@ export const getAllProvinces: (token: string) => Promise<any> = async (token: st
       method: "GET"
     });
 
+    // console.log(await response.text())
     return await response.json();
   } catch (error) {
     console.log(error)

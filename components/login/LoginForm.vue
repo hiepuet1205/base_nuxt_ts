@@ -53,6 +53,7 @@ const { loginHandle } = authStore
 const submit = () => {
   form.value?.validate().then(async ({ valid: isValid }) => {
     const data = await login({username: username.value, password: password.value});
+    console.log(data)
     if(data.id_token){
       loginHandle(data.id_token)
       await navigateTo('/')

@@ -1,7 +1,7 @@
 import { API_MASTER } from "~/constants/api";
 import type { District } from "~/types/master";
 
-const apiUrl = `${API_MASTER}districts/`;
+const apiUrl = `${API_MASTER}services/master/districts`;
 
 export const getAllDistricts: (token: string) => Promise<any> = async (token: string) => {
   try {

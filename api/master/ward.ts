@@ -1,7 +1,7 @@
 import { API_MASTER } from "~/constants/api";
 import type { Ward } from "~/types/master";
 
-const apiUrl = `${API_MASTER}wards/`;
+const apiUrl = `${API_MASTER}services/master/wards`;
 
 export const getAllWards: (token: string) => Promise<any> = async (token: string) => {
   try {
