@@ -1,90 +1,26 @@
 import { API_MASTER } from "~/constants/api";
 import type { District } from "~/types/master";
+import { apiFactory } from "../apiFactory";
 
 const apiUrl = `${API_MASTER}services/master/districts`;
+const districtFactory = apiFactory(apiUrl)
 
 export const getAllDistricts: (token: string) => Promise<any> = async (token: string) => {
-  try {
-    const response = await fetch(`${apiUrl}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "GET"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return [];
-  }
+  return await districtFactory.getApi(token);
 }
 
-export const getDistrict: (token: string, id: number) => Promise<any> = async (token, id) => {
-  try {
-    const response = await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "GET"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return null;
-  }
+export const getDistrict: (token: string, id: number) => Promise<any> = async (token: string, id: number) => {
+  return await apiFactory(`${apiUrl}/${id}`).getApi(token);
 }
 
-export const createDistrict: (token: string, district: District) => Promise<any> = async (token, district) => {
-  try {
-    const response = await fetch(`${apiUrl}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(district),
-      method: "POST"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+export const createDistrict: (token: string, district: District) => Promise<any> = async (token: string, district: District) => {
+  return await districtFactory.postApi(district, token);
 }
 
-export const updateDistrict: (token: string, id: number, district: District) => Promise<any> = async (token, id, district) => {
-  try {
-    const response = await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(district),
-      method: "PUT"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return null;
-  }
+export const updateDistrict: (token: string, id: number, district: District) => Promise<any> = async (token: string, id: number, district: District) => {
+  return await districtFactory.putApi(id, district, token);
 }
 
-export const deleteDistrict: (token: string, id: number) => Promise<any> = async (token, id) => {
-  try {
-    await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "DELETE"
-    });
-    return true;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
+export const deleteDistrict: (token: string, id: number) => Promise<any> = async (token: string, id: number) => {
+  return await districtFactory.deleteApi(id, token);
 }

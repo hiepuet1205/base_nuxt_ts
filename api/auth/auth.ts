@@ -1,30 +1,18 @@
 import { API_AUTH } from "~/constants/api"
+import { apiFactory } from "../apiFactory";
 
 interface AUTH {
   username: string;
   password: string;
 }
 
+const loginFactory = apiFactory(`${API_AUTH}api/authenticate`)
+const registerFactory = apiFactory(`${API_AUTH}api/register`)
+
 export const login: (auth: AUTH) => Promise<any> = async (auth: AUTH) => {
-  const res = await fetch(`${API_AUTH}api/authenticate`, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: JSON.stringify(auth)
-  });
-  return await res.json();
+  return await loginFactory.postApi(auth);
 }
 
 export const register: (auth: AUTH) => Promise<any> = async (auth: AUTH) => {
-  const res = await fetch(`${API_AUTH}api/register`, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: JSON.stringify(auth)
-  });
-  return await res.json();
+  return await registerFactory.postApi(auth);
 }

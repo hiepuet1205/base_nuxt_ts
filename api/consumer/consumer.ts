@@ -1,40 +1,17 @@
 import { API_CONSUMER } from "~/constants/api";
+import { apiFactory } from "../apiFactory";
 
 const apiUrl = `${API_CONSUMER}`
 
-// export const getConsumerAddressInfo = async (token) => {
-//   try {
-//     const response = await fetch(`${apiUrl}consumer-addresses/info`, {
-//       headers: {
-//         'Accept': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//       },
-//       method: "GET"
-//     });
+const consumerFactory = apiFactory(`${apiUrl}consumer-addresses/info`)
+const consumerServiceFactory = apiFactory(`${apiUrl}consumers/get-services`)
 
-//     return await response.json();
-//   } catch (error) {
-//     console.log(error)
-//     return null;
-//   }
+// export const getConsumerAddressInfo = async (token: string) => {
+//   return await consumerFactory.getApi(token)
 // }
 
-// export const getServices = async (token, maxDistance) => {
-//   try {
-//     const response = await fetch(`${apiUrl}consumers/get-services`, {
-//       headers: {
-//         'Accept': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//       },
-//       body: JSON.stringify(maxDistance),
-//       method: "POST"
-//     });
-
-//     return await response.json();
-//   } catch (error) {
-//     console.log(error)
-//     return null;
-//   }
+// export const getServices = async (token: string, maxDistance: number) => {
+//   return await consumerServiceFactory.postApi(maxDistance, token);
 // }
 
 // Test:

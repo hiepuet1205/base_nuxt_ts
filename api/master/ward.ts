@@ -1,90 +1,26 @@
 import { API_MASTER } from "~/constants/api";
 import type { Ward } from "~/types/master";
+import { apiFactory } from "../apiFactory";
 
 const apiUrl = `${API_MASTER}services/master/wards`;
+const wardFactory = apiFactory(apiUrl)
 
 export const getAllWards: (token: string) => Promise<any> = async (token: string) => {
-  try {
-    const response = await fetch(`${apiUrl}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "GET"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return [];
-  }
+  return await wardFactory.getApi(token);
 }
 
-export const getWard: (token: string, id: number) => Promise<any> = async (token, id) => {
-  try {
-    const response = await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "GET"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return null;
-  }
+export const getWard: (token: string, id: number) => Promise<any> = async (token: string, id: number) => {
+  return await apiFactory(`${apiUrl}/${id}`).getApi(token);
 }
 
-export const createWard: (token: string, ward: Ward) => Promise<any> = async (token, ward) => {
-  try {
-    const response = await fetch(`${apiUrl}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(ward),
-      method: "POST"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+export const createWard: (token: string, ward: Ward) => Promise<any> = async (token: string, ward: Ward) => {
+  return await wardFactory.postApi(ward, token);
 }
 
-export const updateWard: (token: string, id: number, ward: Ward) => Promise<any> = async (token, id, ward) => {
-  try {
-    const response = await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(ward),
-      method: "PUT"
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.log(error)
-    return null;
-  }
+export const updateWard: (token: string, id: number, ward: Ward) => Promise<any> = async (token: string, id: number, ward: Ward) => {
+  return await wardFactory.putApi(id, ward, token);
 }
 
-export const deleteWard: (token: string, id: number) => Promise<any> = async (token, id) => {
-  try {
-    await fetch(`${apiUrl}${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      method: "DELETE"
-    });
-    return true;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
+export const deleteWard: (token: string, id: number) => Promise<any> = async (token: string, id: number) => {
+  return await wardFactory.deleteApi(id, token);
 }
